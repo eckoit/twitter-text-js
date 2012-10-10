@@ -1,14 +1,21 @@
-if (typeof window === "undefined" || window === null) {
-  window = { twttr: {} };
-}
-if (window.twttr == null) {
-  window.twttr = {};
-}
-if (typeof twttr === "undefined" || twttr === null) {
-  twttr = {};
-}
-
-(function() {
+(function (root, factory) {
+    if (typeof exports === 'object') {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like enviroments that support module.exports,
+        // like Node.
+        module.exports = factory();
+    } else if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define([], factory);
+    } else {
+        // Browser globals
+        if (window.twttr == null) {
+          window.twttr = {};
+        }
+        window.twttr.txt = factory();
+    }
+}(this, function (b) {
+  var twttr = {};
   twttr.txt = {};
   twttr.txt.regexen = {};
 
@@ -1276,8 +1283,6 @@ if (typeof twttr === "undefined" || twttr === null) {
     return (!string || (string.match(regex) && RegExp["$&"] === string));
   }
 
-  if (typeof module != 'undefined' && module.exports) {
-    module.exports = twttr.txt;
-  }
+  return twttr.txt;
 
-}());
+}));

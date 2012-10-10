@@ -9,4 +9,10 @@
     "type": "git"
     , "url": "https://github.com/twitter/twitter-text-js.git"
   }
+  , "jam" : {
+        "include": [
+              "README.md",
+              "twitter-text.js"
+        ]
+  }
 }
